@@ -19,14 +19,22 @@ body {
   
   #main-photo {
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     height: auto;
     border-radius: 8px;
   }
 
   #calendar-map {
     width: 100%;  /* 부모 화면 크기에 맞게 크기 조정 */
-    max-width: 600px;
+    max-width: 700px;
+    margin: 0 auto;
+    box-sizing: border-box;  /* 패딩을 포함한 크기 계산 */
+    overflow: hidden;  /* 넘치는 콘텐츠 숨김 */
+  }
+
+  #gallery {
+    width: 100%;  /* 부모 화면 크기에 맞게 크기 조정 */
+    max-width: 700px;
     margin: 0 auto;
     box-sizing: border-box;  /* 패딩을 포함한 크기 계산 */
     overflow: hidden;  /* 넘치는 콘텐츠 숨김 */
@@ -35,7 +43,7 @@ body {
   .responsive-image {
     width: 100%;  /* 이미지가 부모 요소의 너비에 맞게 크기 조정 */
     height: auto;  /* 세로 비율 유지 */
-    max-width: 600px;
+    max-width: 700px;
     max-height: 100%;  /* 이미지가 부모 높이를 넘지 않도록 제한 */
     display: block;  /* 이미지가 inline 요소일 경우, 여백이 생기는 문제 해결 */
     margin: 0 auto;  /* 이미지 가운데 정렬 */
@@ -60,14 +68,14 @@ body {
     gap: 10px;
     justify-items: center; /* 사진들을 중앙 정렬 */
     width: 100%; /* 그리드의 가로폭을 100%로 설정 */
-    max-width: 600px; /* 그리드의 최대 너비 설정 (선택 사항) */
+    max-width: 700px; /* 그리드의 최대 너비 설정 (선택 사항) */
     margin: 0 auto; /* 그리드를 중앙 정렬 */
   }
   
   #gallery .gallery-item {
     width: 100%;
-    max-width: 180px;
-    height: 180px;
+    max-width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 8px;
     cursor: pointer;
