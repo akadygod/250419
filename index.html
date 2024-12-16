@@ -1,11 +1,126 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitation for our Wedding</title>
+  <!-- Firebase SDK 연결 -->
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+  </style>
+  <!-- 스타일링 CSS 파일 링크 -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Hello 하이</h1>
+  <!-- 메인 웨딩 사진 -->
+  <header>
+    <img src="img/main_image.JPG" alt="웨딩 사진" id="main-photo">
+    <h1 style="margin-bottom: 80px;">
+        <span style="font-size: 2.5rem; font-weight: bold; color: #000;">이&nbsp;&nbsp;재&nbsp;&nbsp;욱</span>
+        <span style="font-size: 1.2rem; font-weight: normal; color: #555;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그리고&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span style="font-size: 2.5rem; font-weight: bold; color: #000;">임&nbsp;&nbsp;다&nbsp;&nbsp;영</span>
+    </h1>
+    <h2 style="margin-bottom: 20px;">2025년 4월 19일 토요일 오전 11시</h2>
+    <h2 style="margin-bottom: 200px;">더 화이트 베일 1층 화이트베일홀</h2>
+    <img src="img/cake.png" style="margin-bottom: 200px;">
+    
+    <h1>
+        <span style="font-size: 2.0rem; font-weight: bold; color: #000;">이형창 · 최수현</span>
+        <span style="font-size: 1.5rem; font-weight: normal; color: #555;">의 장남</span>
+        <span style="font-size: 2.0rem; font-weight: bold; color: #000;">재욱</span>
+    </h1>
+
+    <h1 style="margin-bottom: 200px;">
+        <span style="font-size: 2.0rem; font-weight: bold; color: #000;">임지중 · 채희숙</span>
+        <span style="font-size: 1.5rem; font-weight: normal; color: #555;">의 장녀</span>
+        <span style="font-size: 2.0rem; font-weight: bold; color: #000;">다영</span>
+    </h1>
+  </header>
+
+  <section id="calendar-map">
+    <img src="img/april.jpg" class="responsive-image">
+  </section>
+
+  <!-- 웨딩 사진 갤러리 -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-images">
+      <img src="img/img1.jpg" alt="사진 1" class="gallery-item" onclick="openGallery(this)">
+      <img src="img/img2.jpg" alt="사진 2" class="gallery-item" onclick="openGallery(this)">
+      <img src="img/img3.jpg" alt="사진 3" class="gallery-item" onclick="openGallery(this)">
+      <img src="img/img4.jpg" alt="사진 3" class="gallery-item" onclick="openGallery(this)">
+      <img src="img/img5.jpg" alt="사진 3" class="gallery-item" onclick="openGallery(this)">
+      <img src="img/img6.jpg" alt="사진 3" class="gallery-item" onclick="openGallery(this)">
+      <img src="img/img7.jpg" alt="사진 3" class="gallery-item" onclick="openGallery(this)">
+      <img src="img/img8.jpg" alt="사진 3" class="gallery-item" onclick="openGallery(this)">
+      <img src="img/img9.jpg" alt="사진 3" class="gallery-item" onclick="openGallery(this)">
+      <img src="img/img10.jpg" alt="사진 3" class="gallery-item" onclick="openGallery(this)">
+    </div>
+  </section>
+
+  <!-- 방명록 -->
+  <section id="guestbook">
+    <h2>Message (추가 예정)</h2>
+    <div id="messages"></div>
+    <!-- <textarea id="message" placeholder="메시지를 남겨주세요."></textarea> -->
+    <button onclick="sendMessage()">메시지 보내기</button>
+  </section>
+
+  <!-- 사진 확대 뷰 -->
+  <div id="lightbox" class="lightbox" onclick="closeGallery()">
+    <img id="lightbox-image" src="" alt="사진 확대">
+  </div>
+
+  <script>
+    // Firebase 초기화
+    const firebaseConfig = {
+      apiKey: "your-api-key",
+      authDomain: "your-auth-domain",
+      databaseURL: "your-database-url",
+      projectId: "your-project-id",
+      storageBucket: "your-storage-bucket",
+      messagingSenderId: "your-messaging-sender-id",
+      appId: "your-app-id"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database(app);
+
+    // 실시간 방명록 기능
+    function sendMessage() {
+      const message = document.getElementById('message').value;
+      if (message) {
+        firebase.database().ref('messages').push({
+          text: message,
+          timestamp: Date.now()
+        });
+        document.getElementById('message').value = ''; // 입력 필드 비우기
+      }
+    }
+
+    // 방명록 메시지 읽기
+    firebase.database().ref('messages').on('child_added', function(snapshot) {
+      const messageData = snapshot.val();
+      const messageElement = document.createElement('p');
+      messageElement.textContent = messageData.text;
+      document.getElementById('messages').appendChild(messageElement);
+    });
+
+    // 사진 갤러리 클릭 시 확대
+    function openGallery(img) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightbox-image');
+      lightboxImage.src = img.src;
+      lightbox.style.display = 'flex';
+    }
+
+    // 확대된 사진 클릭 시 닫기
+    function closeGallery() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
