@@ -40,6 +40,13 @@ body {
     overflow: hidden;  /* 넘치는 콘텐츠 숨김 */
   }
 
+  .gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* 이미지 간의 간격 */
+  }
+  
   .responsive-image {
     width: 100%;  /* 이미지가 부모 요소의 너비에 맞게 크기 조정 */
     height: auto;  /* 세로 비율 유지 */

@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <audio id="background-music" src="Until I Found You.mp3" loop></audio>
+ 
   <!-- 메인 웨딩 사진 -->
   <header>
     <img src="img/main_image.JPG" alt="웨딩 사진" id="main-photo">
@@ -46,8 +48,8 @@
 
   <!-- 웨딩 사진 갤러리 -->
   <section id="gallery" style="margin-bottom: 200px;">
-    <h2>Gallery</h2>
-    <div class="gallery-images">
+    <h2>Gallery<br></h2>
+    <div class="gallery-container">
       <img src="img/img1.jpg" alt="사진 1" class="gallery-item" onclick="openGallery(this)">
       <img src="img/img2.jpg" alt="사진 2" class="gallery-item" onclick="openGallery(this)">
       <img src="img/img3.jpg" alt="사진 3" class="gallery-item" onclick="openGallery(this)">
@@ -94,6 +96,8 @@
     <img id="lightbox-image" src="" alt="사진 확대">
   </div>
 
+
+  
   <script>
     // Firebase 초기화
     const firebaseConfig = {
@@ -108,6 +112,11 @@
 
     const app = firebase.initializeApp(firebaseConfig);
     const database = firebase.database(app);
+
+    window.onload = function() {
+    const audio = document.getElementById('background-music');
+    audio.play();
+    }
 
     // 실시간 방명록 기능
     function sendMessage() {
