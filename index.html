@@ -113,10 +113,10 @@
     const app = firebase.initializeApp(firebaseConfig);
     const database = firebase.database(app);
 
-    window.onload = function() {
-    const audio = document.getElementById('background-music');
-    audio.play();
-    }
+    document.body.addEventListener('click', function() {
+      const audio = document.getElementById('background-music');
+      audio.play();
+    });
 
     // 실시간 방명록 기능
     function sendMessage() {
