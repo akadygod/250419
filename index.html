@@ -99,11 +99,13 @@
 
   
   <script>
-    window.onload = function() {
+    document.body.addEventListener('click', function() {
       const audio = document.getElementById('background-music');
-      audio.play();
-    };
-
+      audio.play().catch(function(error) {
+        console.log('Audio play failed:', error);
+      });
+    });
+    
     // Firebase 초기화
     const firebaseConfig = {
       apiKey: "your-api-key",
