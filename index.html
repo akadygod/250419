@@ -99,6 +99,11 @@
 
   
   <script>
+    window.onload = function() {
+      const audio = document.getElementById('background-music');
+      audio.play();
+    };
+
     // Firebase 초기화
     const firebaseConfig = {
       apiKey: "your-api-key",
@@ -113,10 +118,6 @@
     const app = firebase.initializeApp(firebaseConfig);
     const database = firebase.database(app);
 
-    document.body.addEventListener('click', function() {
-      const audio = document.getElementById('background-music');
-      audio.play();
-    });
 
     // 실시간 방명록 기능
     function sendMessage() {
