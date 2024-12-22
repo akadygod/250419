@@ -99,19 +99,13 @@
 
   
   <script>
-  var AudioContext;
-  var audioContext;
-
-  window.onload = function() {
-      navigator.mediaDevices.getUserMedia({ audio: true }).then(() => {
-          AudioContext = window.AudioContext || window.webkitAudioContext;
-          audioContext = new AudioContext();
-      }).catch(e => {
-          console.error(`Audio permissions denied: ${e}`);
+    document.body.addEventListener('click', function() {
+      const audio = document.getElementById('background-music');
+      audio.play().catch(function(error) {
+        console.log('Audio play failed:', error);
       });
-  }
-
-
+    });
+    
     // Firebase 초기화
     const firebaseConfig = {
       apiKey: "your-api-key",
