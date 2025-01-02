@@ -63,6 +63,13 @@ body {
     justify-content: center;
     gap: 10px; /* 이미지 간의 간격 */
   }
+
+  .gallery-item {
+    flex: 1 1 calc(50% - 20px); /* 최소 너비를 50%로 설정하고 간격을 고려 */
+    max-width: calc(50% - 20px); /* 최대 너비를 50%로 설정하고 간격을 고려 */
+    min-width: 150px; /* 최소 너비를 설정하여 작은 화면에서도 최소 2장이 보이도록 설정 */
+    margin: 5px;
+  }
   
   .responsive-image {
     width: 100%;  /* 이미지가 부모 요소의 너비에 맞게 크기 조정 */

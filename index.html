@@ -9,6 +9,11 @@
   <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js"></script>
 
+  <!-- FullCalendar CSS 파일 링크 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css" rel="stylesheet">
+  <!-- FullCalendar JS 파일 링크 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+ 
   <!-- 스타일링 CSS 파일 링크 -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -41,7 +46,7 @@
   </header>
 
   <section id="calendar-map" style="margin-bottom: 200px;">
-    <img src="img/april3.JPG" class="responsive-image">
+    <img src="img/april4.JPG" class="responsive-image">
   </section>
 
   <!-- 웨딩 사진 갤러리 -->
@@ -77,10 +82,6 @@
   </section>
 
 
-
-
-
-
   <!-- 방명록 -->
   <section id="guestbook">
     <h2>Message (추가 예정)</h2>
@@ -99,11 +100,12 @@
   <script>
     document.body.addEventListener('click', function() {
       const audio = document.getElementById('background-music');
+      audio.volume = 0.2;
       audio.play().catch(function(error) {
         console.log('Audio play failed:', error);
       });
     });
-    
+
     // Firebase 초기화
     const firebaseConfig = {
       apiKey: "your-api-key",
