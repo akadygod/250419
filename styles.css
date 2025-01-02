@@ -64,6 +64,22 @@ body {
     overflow: hidden;  /* 넘치는 콘텐츠 숨김 */
   }
 
+  #account {
+    width: 100%;  /* 부모 화면 크기에 맞게 크기 조정 */
+    max-width: 700px;
+    margin: 0 auto;
+    box-sizing: border-box;  /* 패딩을 포함한 크기 계산 */
+    overflow: hidden;  /* 넘치는 콘텐츠 숨김 */
+  }
+
+  #guestbook {
+    width: 100%;  /* 부모 화면 크기에 맞게 크기 조정 */
+    max-width: 700px;
+    margin: 0 auto;
+    box-sizing: border-box;  /* 패딩을 포함한 크기 계산 */
+    overflow: hidden;  /* 넘치는 콘텐츠 숨김 */
+  }
+
   .gallery-container {
     display: flex;
     flex-wrap: wrap;
@@ -87,11 +103,6 @@ body {
     margin: 0 auto;  /* 이미지 가운데 정렬 */
   }
   
-  .icon {
-    width: 50px; /* 아이콘의 너비를 50px로 설정 */
-    height: auto; /* 세로 비율 유지 */
-  }
-
   h2 {
     color: #1c2868;
     text-align: center;
