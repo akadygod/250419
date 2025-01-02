@@ -9,11 +9,6 @@
   <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js"></script>
 
-  <!-- FullCalendar CSS 파일 링크 -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css" rel="stylesheet">
-  <!-- FullCalendar JS 파일 링크 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
- 
   <!-- 스타일링 CSS 파일 링크 -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -24,14 +19,23 @@
   <header>
     <img src="img/main_image.JPG" alt="웨딩 사진" id="main-photo">
     <h1 style="margin-bottom: 80px;">
-        <span class="highlighted-text">이&nbsp;&nbsp;재&nbsp;&nbsp;욱</span>
+        <span class="highlighted-text">이 재 욱</span>
         <span style="font-size: 2.1rem; font-weight: normal; color: #e22e2e;">&nbsp;&nbsp;♡&nbsp;&nbsp;</span>
-        <span class="highlighted-text">임&nbsp;&nbsp;다&nbsp;&nbsp;영</span>
+        <span class="highlighted-text">임 다 영</span>
     </h1>
-    <h2 style="font-size: 2.0rem; margin-bottom: 20px;">2025년 4월 19일 토요일 오전 11시</h2>
-    <h2 style="font-size: 2.0rem; margin-bottom: 200px;">더 화이트 베일 1층 화이트베일홀</h2>
-    <img src="img/cake.png" style="margin-bottom: 200px;">
+    <h2 style="font-size: 1.9rem; margin-bottom: 20px;">2025년 4월 19일 토요일 오전 11시</h2>
+    <h2 style="font-size: 1.9rem; margin-bottom: 200px;">더 화이트 베일 1층 화이트베일홀</h2>
+    <img src="img/icon.png" class="icon" style="margin-bottom: 200px;">
     
+    <h2 style="margin-bottom: 200px;"> 최고의 순간은 갑자기 찾아오는 거야. <br> - 니모를 찾아서
+    <br><br><br> 
+    함께하는 여섯번 째 봄,
+    <br><br> 최고의 순간이 찾아왔습니다.
+    <br><br> 저희 두 사람의 새로운 시작을
+    <br><br> 따뜻한 마음으로 지켜봐주세요.
+    </h2>
+
+
     <h1>
         <span style="font-size: 2.1rem; font-weight: bold; color: #000;">이형창 · 최수현</span>
         <span style="font-size: 1.8rem; font-weight: normal; color: #555;">의 장남</span>
@@ -83,6 +87,14 @@
     </h2>
   </section>
 
+  <!-- 계좌번호 섹션 -->
+  <section id="account" style="margin-bottom: 200px;">
+    <h2>for test</h2>
+    <div class="account-container">
+      <p id="account-number">123-456-7890</p>
+      <button onclick="copyAccountNumber()">복사</button>
+    </div>
+  </section>
 
   <!-- 방명록 -->
   <section id="guestbook">
@@ -122,6 +134,15 @@
     const app = firebase.initializeApp(firebaseConfig);
     const database = firebase.database(app);
 
+    // 계좌번호 복사 기능
+    function copyAccountNumber() {
+      const accountNumber = document.getElementById('account-number').innerText;
+      navigator.clipboard.writeText(accountNumber).then(function() {
+        alert('복사되었습니다.');
+      }, function(err) {
+        console.error('복사에 실패했습니다.', err);
+      });
+    }
 
     // 실시간 방명록 기능
     function sendMessage() {
@@ -156,5 +177,15 @@
       document.getElementById('lightbox').style.display = 'none';
     }
   </script>
+  <style>
+  .account-container {
+  display: flex;
+  align-items: center;
+  }
+  .account-container p {
+    margin-right: 10px;
+  }
+  </style>
+
 </body>
 </html>

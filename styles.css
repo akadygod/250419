@@ -15,6 +15,13 @@ body {
     font-style: normal;
   }
 
+  @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
   header {
     text-align: center;
     
@@ -80,6 +87,11 @@ body {
     margin: 0 auto;  /* 이미지 가운데 정렬 */
   }
   
+  .icon {
+    width: 130px; /* 아이콘의 너비를 50px로 설정 */
+    height: auto; /* 세로 비율 유지 */
+  }
+
   h2 {
     color: #1c2868;
     text-align: center;
