@@ -74,7 +74,7 @@ body {
   .responsive-image {
     width: 100%;  /* 이미지가 부모 요소의 너비에 맞게 크기 조정 */
     height: auto;  /* 세로 비율 유지 */
-    max-width: 700px;
+    max-width: 600px;
     max-height: 100%;  /* 이미지가 부모 높이를 넘지 않도록 제한 */
     display: block;  /* 이미지가 inline 요소일 경우, 여백이 생기는 문제 해결 */
     margin: 0 auto;  /* 이미지 가운데 정렬 */
