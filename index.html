@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invitation for our Wedding</title>
   <!-- Firebase SDK 연결 -->
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
 
   <!-- 스타일링 CSS 파일 링크 -->
   <link rel="stylesheet" href="styles.css">
@@ -96,16 +96,19 @@
     <h2>for test</h2>
     <div class="account-container">
       <p id="account-number">123-456-7890</p>
-      <button onclick="copyAccountNumber()">복사</button>
+      <button class="copy-button" onclick="copyAccountNumber()">복사</button>
     </div>
   </section>
 
   <!-- 방명록 -->
-  <section id="guestbook">
-    <h2>Message (추가 예정)</h2>
+  <section id="guestbook" style="margin-bottom: 200px;">
+    <h2>Message</h2>
+    <div class="guestbook-form">
+      <input type="text" id="guest-name" placeholder="이름" required>
+      <textarea id="guest-message" placeholder="메시지를 남겨주세요." required></textarea>
+      <button onclick="sendMessage()">등록하기</button>
+    </div>
     <div id="messages"></div>
-    <!-- <textarea id="message" placeholder="메시지를 남겨주세요."></textarea> -->
-    <button onclick="sendMessage()">메시지 보내기</button>
   </section>
 
   <!-- 사진 확대 뷰 -->
@@ -113,8 +116,6 @@
     <img id="lightbox-image" src="" alt="사진 확대">
   </div>
 
-
-  
   <script>
     document.body.addEventListener('click', function() {
       const audio = document.getElementById('background-music');
@@ -126,17 +127,18 @@
 
     // Firebase 초기화
     const firebaseConfig = {
-      apiKey: "your-api-key",
-      authDomain: "your-auth-domain",
-      databaseURL: "your-database-url",
-      projectId: "your-project-id",
-      storageBucket: "your-storage-bucket",
-      messagingSenderId: "your-messaging-sender-id",
-      appId: "your-app-id"
+      apiKey: "AIzaSyCO0oz6zBKg27K03ibcrJGmxzUGfmxx6rM",
+      authDomain: "jw-dy-6fc7f.firebaseapp.com",
+      databaseURL: "https://jw-dy-6fc7f-default-rtdb.firebaseio.com",
+      projectId: "jw-dy-6fc7f",
+      storageBucket: "jw-dy-6fc7f.appspot.com",
+      messagingSenderId: "291743989930",
+      appId: "1:291743989930:web:1cdff0e42bad35e62e50d3"
     };
 
-    const app = firebase.initializeApp(firebaseConfig);
-    const database = firebase.database(app);
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
 
     // 계좌번호 복사 기능
     function copyAccountNumber() {
@@ -150,21 +152,28 @@
 
     // 실시간 방명록 기능
     function sendMessage() {
-      const message = document.getElementById('message').value;
-      if (message) {
+      const name = document.getElementById('guest-name').value;
+      const message = document.getElementById('guest-message').value;
+      if (name && message) {
         firebase.database().ref('messages').push({
+          name: name,
           text: message,
           timestamp: Date.now()
+        }).then(() => {
+          document.getElementById('guest-name').value = ''; // 입력 필드 비우기
+          document.getElementById('guest-message').value = ''; // 입력 필드 비우기
+        }).catch((error) => {
+          console.error('메시지 등록에 실패했습니다.', error);
         });
-        document.getElementById('message').value = ''; // 입력 필드 비우기
       }
     }
+
 
     // 방명록 메시지 읽기
     firebase.database().ref('messages').on('child_added', function(snapshot) {
       const messageData = snapshot.val();
       const messageElement = document.createElement('p');
-      messageElement.textContent = messageData.text;
+      messageElement.innerHTML = `<strong>${messageData.name}:</strong> ${messageData.text}`;
       document.getElementById('messages').appendChild(messageElement);
     });
 
@@ -181,14 +190,18 @@
       document.getElementById('lightbox').style.display = 'none';
     }
   </script>
+
+
   <style>
-  .account-container {
-  display: flex;
-  align-items: center;
-  }
-  .account-container p {
-    margin-right: 10px;
-  }
+    .account-container {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* 가운데 정렬 */
+    }
+    .account-container p {
+      margin-right: 10px;
+      font-size: 1.2rem; /* 폰트 크기 증가 */
+    }
 
   .map-buttons-container {
     text-align: center;
@@ -211,6 +224,65 @@
   .map-button:hover {
     background-color: #007bff;
   }
+
+  .guestbook-form {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .guestbook-form input,
+    .guestbook-form textarea {
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: inherit; /* 기존 폰트 유지 */
+    }
+
+    .guestbook-form button {
+      padding: 10px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #fff;
+      background-color: #1c2868;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-family: inherit; /* 기존 폰트 유지 */
+      width: 130px; /* 가로 길이 조정 */
+      align-self: center; /* 가운데 정렬 */
+    }
+
+    .guestbook-form button:hover {
+      background-color: #007bff;
+    }
+
+    #messages p {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1.5rem; /* 폰트 크기 증가 */
+    }
+
+    .copy-button {
+      padding: 5px 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      background-color: #1c2868; /* 네이버 지도 버튼 색상과 동일 */
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-family: inherit; /* 기존 폰트 유지 */
+    }
+
+    .copy-button:hover {
+      background-color: #007bff; /* 연한 파란색으로 변경 */
+    }
   </style>
 
 </body>
