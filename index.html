@@ -29,7 +29,7 @@
     
     <h2 style="margin-bottom: 200px;"> 최고의 순간은 갑자기 찾아오는 거야. <br> - 니모를 찾아서
     <br><br><br> 
-    함께하는 여섯번 째 봄,
+    함께하는 여섯 번째 봄,
     <br><br> 최고의 순간이 찾아왔습니다.
     <br><br> 저희 두 사람의 새로운 시작을
     <br><br> 따뜻한 마음으로 지켜봐주세요.
@@ -83,8 +83,12 @@
     </h2>
     <h2 style="margin-bottom: 20px;">
         <span style="font-size: 1.8rem; font-weight: bold; color: #000;">승용차 이용 시<br></span>
-        <span style="font-size: 1.7rem; font-weight: normal; color: #555;">전용주차타워 (서초구 서초중앙로2길 10) 이용</span>
+        <span style="font-size: 1.7rem; font-weight: normal; color: #555;">전용주차타워 (서초구 서초중앙로2길 10)</span>
     </h2>
+    <div class="map-buttons-container">
+      <a href="https://map.naver.com/v5/search/%EC%84%9C%EC%B4%88%EC%A4%91%EC%95%99%EB%A1%9C%2014" target="_blank" class="map-button">네이버 지도</a>
+      <a href="https://map.kakao.com/link/search/%EC%84%9C%EC%B4%88%EC%A4%91%EC%95%99%EB%A1%9C%2014" target="_blank" class="map-button">카카오 지도</a>
+    </div>
   </section>
 
   <!-- 계좌번호 섹션 -->
@@ -114,7 +118,7 @@
   <script>
     document.body.addEventListener('click', function() {
       const audio = document.getElementById('background-music');
-      audio.volume = 0.2;
+      audio.volume = 0.1;
       audio.play().catch(function(error) {
         console.log('Audio play failed:', error);
       });
@@ -184,6 +188,28 @@
   }
   .account-container p {
     margin-right: 10px;
+  }
+
+  .map-buttons-container {
+    text-align: center;
+  }
+
+  .map-button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #1c2868;
+    border: none;
+    border-radius: 15px;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .map-button:hover {
+    background-color: #007bff;
   }
   </style>
 
