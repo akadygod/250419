@@ -25,10 +25,14 @@
     </h1>
     <h2 style="font-size: 1.9rem; margin-bottom: 20px;">2025년 4월 19일 토요일 오전 11시</h2>
     <h2 style="font-size: 1.9rem; margin-bottom: 200px;">더 화이트 베일 1층 화이트베일홀</h2>
-    <img src="img/icon.png" class="icon" style="margin-bottom: 200px;">
+    <img src="img/icon.png" class="icon" style="margin-bottom: 15px;">
+    
+    <!-- 카운트다운 타이머 -->
+    <div id="countdown" style="font-size: 1.5rem; font-weight: bold; color: #000; text-align: center; margin-bottom: 200px;"></div>
     
     <h2 style="margin-bottom: 200px;"> 최고의 순간은 갑자기 찾아오는 거야. <br> - 니모를 찾아서
-    <br><br><br> 
+      <img src="music_icon.png" alt="음악 아이콘" id="music-icon" style="cursor: pointer; width: 30px; height: 30px; vertical-align: middle; position: relative; top: -3px;" onclick="toggleMusic()">
+      <br><br><br> 
     함께하는 여섯 번째 봄,
     <br><br> 최고의 순간이 찾아왔습니다.
     <br><br> 저희 두 사람의 새로운 시작을
@@ -117,13 +121,16 @@
   </div>
 
   <script>
-    document.body.addEventListener('click', function() {
+        // 음악 토글 기능
+      function toggleMusic() {
       const audio = document.getElementById('background-music');
-      audio.volume = 0.1;
-      audio.play().catch(function(error) {
-        console.log('Audio play failed:', error);
-      });
-    });
+      if (audio.paused) {
+        audio.volume = 0.1;
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
 
     // Firebase 초기화
     const firebaseConfig = {
@@ -189,6 +196,27 @@
     function closeGallery() {
       document.getElementById('lightbox').style.display = 'none';
     }
+
+        // 카운트다운 타이머
+      function updateCountdown() {
+      const countdownElement = document.getElementById('countdown');
+      const targetDate = new Date('2025-04-19T11:00:00');
+      const now = new Date();
+      const timeDifference = targetDate - now;
+
+      if (timeDifference > 0) {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        countdownElement.innerHTML = `D - ${days}`;
+      } else {
+        countdownElement.innerHTML = 'D - Day';
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
   </script>
 
 
