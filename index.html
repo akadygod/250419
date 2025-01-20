@@ -154,13 +154,32 @@
     const database = firebase.database();
 
     // 계좌번호 복사 기능
-    function copyAccountNumber() {
-      const accountNumber = document.getElementById('account-number').innerText;
-      navigator.clipboard.writeText(accountNumber).then(function() {
+    function copyAccountNumber(accountId) {
+      const accountNumberElement = document.getElementById(accountId);
+      const accountNumberText = accountNumberElement.innerText || accountNumberElement.textContent;
+
+      // Extract the account number after "하나"
+      const accountNumber = accountNumberText.split('하나 ')[1];
+
+      // Create a temporary textarea element to hold the text to be copied
+      const tempTextarea = document.createElement('textarea');
+      tempTextarea.value = accountNumber;
+      document.body.appendChild(tempTextarea);
+
+      // Select the text in the textarea
+      tempTextarea.select();
+      tempTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+      // Try to copy the text
+      try {
+        document.execCommand('copy');
         alert('복사되었습니다.');
-      }, function(err) {
+      } catch (err) {
         console.error('복사에 실패했습니다.', err);
-      });
+      }
+
+      // Remove the temporary textarea element
+      document.body.removeChild(tempTextarea);
     }
 
     // 실시간 방명록 기능
